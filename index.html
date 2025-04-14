@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2F3BA2">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Pénzügyi Napló</title>
+  <!-- Chart.js és DataLabels plugin a diagramhoz -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+<body>
+  <header>
+    <h1>Pénzügyi Napló</h1>
+  </header>
+  
+  <main id="app-content">
+    <!-- Új tranzakció felvitele és keresés -->
+    <section id="transaction-section">
+      <h2>Új Tranzakció</h2>
+      <form id="transaction-form">
+        <label for="transaction-type">Típus:</label>
+        <select id="transaction-type">
+          <option value="bevétel">Bevétel</option>
+          <option value="kiadás">Kiadás</option>
+        </select>
+        <label for="amount">Összeg:</label>
+        <input type="number" id="amount" step="0.01" placeholder="0.00" required>
+        <label for="category">Kategória:</label>
+        <select id="category"></select>
+        <label for="description">Leírás:</label>
+        <input type="text" id="description" placeholder="Pl.: Bevásárlás">
+        <button type="submit">Hozzáadás</button>
+      </form>
+      <label for="search-input">Keresés:</label>
+      <input type="text" id="search-input" placeholder="Keresés kategória vagy leírás alapján">
+    </section>
+  
+    <!-- Saját kategória hozzáadása és menedzsment -->
+    <section id="custom-category-section">
+      <h2>Saját Kategória Hozzáadása</h2>
+      <form id="custom-category-form">
+        <label for="new-category">Új kategória neve:</label>
+        <input type="text" id="new-category" placeholder="Pl.: Szórakozás" required>
+        <label for="new-category-color">Szín:</label>
+        <input type="color" id="new-category-color" value="#000000">
+        <label for="new-category-icon">Ikon (emoji):</label>
+        <input type="text" id="new-category-icon" placeholder="Pl.: 🎉">
+        <button type="submit">Hozzáadás</button>
+      </form>
+      <div id="category-management">
+        <h3>Kategória lista</h3>
+        <ul id="category-list"></ul>
+      </div>
+    </section>
+  
+    <!-- Tranzakciók listája -->
+    <section id="transactions">
+      <h2>Tranzakciók</h2>
+      <ul id="transaction-list"></ul>
+    </section>
+  
+    <!-- Megtakarítások kezelése -->
+    <section id="savings">
+      <h2>Megtakarítások Kezelése</h2>
+      <p>Aktuális megtakarítás: <span id="savings-balance">0.00</span> Ft</p>
+      <form id="savings-form">
+        <label for="savings-amount">Összeg:</label>
+        <input type="number" id="savings-amount" step="0.01" placeholder="0.00" required>
+        <label for="savings-type">Művelet:</label>
+        <select id="savings-type">
+          <option value="befizetés">Befizetés</option>
+          <option value="kivonás">Kivonás</option>
+        </select>
+        <button type="submit">Frissítés</button>
+      </form>
+    </section>
+  
+    <!-- Költségvetés-tervező modul -->
+    <section id="budget">
+      <h2>Költségvetés Terv</h2>
+      <form id="budget-form">
+        <label for="monthly-budget">Havi költségvetés (Ft):</label>
+        <input type="number" id="monthly-budget" step="0.01" placeholder="0.00" required>
+        <button type="submit">Beállítás</button>
+      </form>
+      <p>Jelenlegi havi kiadások: <span id="monthly-expenses">0.00</span> Ft</p>
+      <p>Hátralévő egyenleg: <span id="budget-remaining">0.00</span> Ft</p>
+    </section>
+  
+    <!-- Riportok és vizualizáció (Chart.js) -->
+    <section id="reports">
+      <h2>Riportok</h2>
+      <canvas id="transactions-chart" width="400" height="200"></canvas>
+    </section>
+  
+    <!-- Adat exportálás és importálás CSV formátumban -->
+    <section id="data-management">
+      <h2>Adatkezelés</h2>
+      <button id="export-btn">Exportálás CSV-be</button>
+      <input type="file" id="import-file" accept=".csv">
+      <button id="import-btn">Importálás CSV-ből</button>
+    </section>
+  
+    <!-- Push értesítések tesztje -->
+    <section id="notifications">
+      <h2>Értesítések</h2>
+      <button id="notify-btn">Teszt Értesítés</button>
+    </section>
+  </main>
+  
+  <script src="main.js"></script>
+</body>
+</html>
